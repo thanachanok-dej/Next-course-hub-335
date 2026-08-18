@@ -1,26 +1,185 @@
-@import "tailwindcss";
+/* ==========================================================================
+   Student Course Hub - Minimalist Sage & Pastel Green Theme
+   ========================================================================== */
+
+/* 1. CSS Variables & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Pastel Sage Green Palette */
+  --bg-main: #f4fff4;            /* Soft Sage Background */
+  --card-bg: #ffffff;            /* Clean White Card */
+  --header-bg: #b7e4c7;          /* Minimalist White Header */
+  
+  --primary-accent: #52b788;     /* Soft Sage Green Accent */
+  --primary-hover: #557364;      /* Deep Sage Green for Hover */
+  --primary-light: #e8efe9;      /* Muted Pastel Sage Light Fill */
+  
+  --text-dark: #1b4332;          /* Charcoal with Green Undertone */
+  --text-muted: #2d6a4f;         /* Soft Gray-Green for Subtitle */
+  --border-subtle: #e1e7e3;      /* Very Subtle Border */
+  
+  --status-open-bg: #e2f0e8;     /* Pastel Mint Green */
+  --status-open-text: #2c6e49;   /* Mint Text */
+  --status-closed-bg: #fce8e6;   /* Pastel Coral/Pink */
+  --status-closed-text: #a84138; /* Coral Text */
+
+  --radius-card: 1rem;
+  --radius-badge: 2rem;
+  
+  --shadow-subtle: 0 4px 20px -2px rgba(45, 55, 50, 0.04);
+  --shadow-hover: 0 10px 25px -4px rgba(45, 55, 50, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 2. Global Body & Typography */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: var(--text-dark);
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+p {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* 3. Minimalist Header & Navigation */
+.siteHeader {
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.navbar,
+.page {
+  width: min(100% - 2.5rem, 68rem);
+  margin-inline: auto;
+}
+
+.navList {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.85rem 0;
+  list-style: none;
+  align-items: center;
+}
+
+.navLink {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-badge);
+  transition: all 0.25s ease;
+}
+
+.navLink:hover {
+  color: var(--primary-hover);
+  background-color: var(--primary-light);
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--primary-accent);
+  outline-offset: 2px;
+}
+
+/* 4. Main Page Container */
+.page {
+  padding-block: 2.5rem 4rem;
+  flex: 1;
+}
+
+/* 5. Minimalist Course Cards & Responsive Grid */
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.courseCard {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.courseCard:hover {
+  transform: translateY(-3px);
+  border-color: #cbd8d0;
+  box-shadow: var(--shadow-hover);
+}
+
+.courseCard h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.courseCard p {
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+/* Status Badge Container */
+.courseCard p:last-child {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-badge);
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: fit-content;
+  letter-spacing: 0.01em;
+}
+
+/* Minimal Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+  background-color: var(--header-bg);
 }

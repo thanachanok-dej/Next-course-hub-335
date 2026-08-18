@@ -1,18 +1,18 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function HomePage() {
   const siteName = "CSMJU Website";
-  const courseCount: number = 3;
-  const isOpen: boolean = true;
+  const courseCount = 3;
+  const isOpen = true;
   const topics: string[] = ["HTML", "CSS", "TypeScript", "Next.js"];
-  
 
   return (
-    <main>
+    <main className="page">
       <h1>{siteName}</h1>
       <p>จำนวนรายวิชา: {courseCount}</p>
       <p>สถานะระบบ: {isOpen ? "เปิดใช้งาน" : "ปิดใช้งาน"}</p>
-      <ul>
+
+      <ul className="topicList">
         {topics.map((topic) => (
           <li key={topic}>{topic}</li>
         ))}
